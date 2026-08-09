@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
   <title>Untuk Kamu</title>
-  <link rel="stylesheet" href="style.css?v=level3" />
+  <link rel="stylesheet" href="style.css?v=level4" />
 </head>
 <!--
   Name: Mohamad Farhan
@@ -42,19 +42,32 @@
 
   <section>
     <div class="card">
-      <p class="eyebrow">Untuk kamu Shalmaria Lastrima, dari aku</p>
+      <p class="eyebrow" id="eyebrowTrigger">Untuk kamu Shalmaria Lastrima, dari aku</p>
       <h1 id="timeTitle">Hai, Sayang</h1>
       <p id="timeMessage">Semoga harimu baik-baik aja ya.</p>
 
       <p class="quote" id="quoteText"></p>
+      <p class="days-counter" id="daysCounter"></p>
 
       <div class="btn-row">
         <a href="https://wa.me/6282258934843?text=Makasih%20ya%20udah%20bikin%20ini" class="btn btn-big">Peluk aku dong 🤍</a>
+        <button type="button" id="jarBtn" class="btn btn-ghost">Ambil semangat 💌</button>
       </div>
     </div>
   </section>
 
+  <div class="jar-toast" id="jarToast" aria-live="polite"></div>
+
+  <!-- Pesan rahasia: muncul kalau baris "Untuk kamu..." di atas diketuk 5x -->
+  <div class="secret-overlay" id="secretOverlay" aria-hidden="true">
+    <div class="secret-box">
+      <p class="secret-label">Pesan rahasia 💌</p>
+      <p id="secretMessage"></p>
+      <button type="button" id="secretClose" class="btn btn-ghost">Tutup</button>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script src="script.js?v=level3"></script>
+  <script src="script.js?v=level4"></script>
 </body>
 </html>
