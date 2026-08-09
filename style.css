@@ -331,6 +331,110 @@ section {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.btn-row {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.days-counter {
+  margin-top: 0.9rem;
+  font-size: 0.8rem;
+  opacity: 0.85;
+  letter-spacing: 0.3px;
+}
+
+/* ===== Toples semangat: toast pesan random ===== */
+.jar-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 90;
+  max-width: 360px;
+  width: calc(100% - 40px);
+  background: rgba(255, 255, 255, 0.95);
+  color: #4f3d3f;
+  border-radius: 16px;
+  padding: 16px 18px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  text-align: center;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, 16px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.jar-toast.show {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+/* ===== Pesan rahasia (easter egg) ===== */
+.secret-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: rgba(20, 10, 20, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.secret-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.secret-box {
+  background: rgba(255, 255, 255, 0.97);
+  color: #4f3d3f;
+  border-radius: 20px;
+  padding: 2rem 1.7rem;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  transform: scale(0.9);
+  transition: transform 0.25s ease;
+}
+
+.secret-overlay.open .secret-box {
+  transform: scale(1);
+}
+
+.secret-label {
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 0.7rem;
+}
+
+.secret-box p#secretMessage {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 1.4rem;
+}
+
 /* Tombol utama berdenyut pelan biar berasa "hidup" */
 .btn-big {
   animation: btnHeartbeat 2.4s ease-in-out infinite;
