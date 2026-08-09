@@ -175,6 +175,23 @@ updateGreetingCard();
 setInterval(updateClock, 1000);
 setInterval(updateGreetingCard, 60000);
 
+// ===== Hitung hari bareng =====
+// Ganti tanggal di bawah ini sesuai tanggal yang mau kamu hitung (format: TAHUN-BULAN-TANGGAL)
+const togetherSince = "2023-11-21";
+const daysCounterEl = document.getElementById("daysCounter");
+
+function updateDaysCounter() {
+  if (!daysCounterEl) return;
+  const start = new Date(togetherSince + "T00:00:00");
+  if (isNaN(start.getTime())) return;
+  const diffDays = Math.floor((new Date() - start) / (1000 * 60 * 60 * 24));
+  if (diffDays < 0) return;
+  daysCounterEl.textContent = "Hari ke-" + diffDays + " kita bareng 🤍";
+}
+
+updateDaysCounter();
+setInterval(updateDaysCounter, 60000);
+
 // ===== Cerita kecil yang pelan-pelan makin dalam =====
 // Universal & tersirat supaya tetap nyaman dibaca kapan pun.
 
@@ -479,4 +496,76 @@ setInterval(showStoryQuote, 6000);
       spawnSparkBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
     });
   }
+
+  // ---- Getar halus pas tombol "Peluk aku dong" disentuh (Android/Chrome) ----
+  if (hugBtn && "vibrate" in navigator) {
+    hugBtn.addEventListener("click", function () {
+      navigator.vibrate([15, 30, 15]);
+    });
+  }
+
+  // ---- Toples alasan/semangat: tarik pesan baru kapan aja ----
+  const jarBtn = document.getElementById("jarBtn");
+  const jarToast = document.getElementById("jarToast");
+  const allEncourage = quoteStages.flat().concat(closingMessages);
+  let jarToastTimer = null;
+
+  function showJarToast() {
+    if (!jarToast) return;
+    const pick = allEncourage[Math.floor(Math.random() * allEncourage.length)];
+    jarToast.textContent = pick;
+    jarToast.classList.add("show");
+    clearTimeout(jarToastTimer);
+    jarToastTimer = setTimeout(function () {
+      jarToast.classList.remove("show");
+    }, 5000);
+  }
+
+  if (jarBtn) {
+    jarBtn.addEventListener("click", showJarToast);
+  }
+
+  // ---- Easter egg: ketuk judul kecil di atas kartu 5x buat pesan rahasia ----
+  // Ganti isi pesan rahasia di bawah ini sesuai kata-kata kamu sendiri kalau mau.
+  const secretMessage =
+    "Pesan rahasia buat kamu: apapun yang lagi kamu rasain sekarang, itu nggak mengubah caraku bangga sama kamu. Aku tetap di sini, secepat atau selambat apapun langkahmu.";
+
+  const eyebrowTrigger = document.getElementById("eyebrowTrigger");
+  const secretOverlay = document.getElementById("secretOverlay");
+  const secretMessageEl = document.getElementById("secretMessage");
+  const secretClose = document.getElementById("secretClose");
+  let secretTapCount = 0;
+  let secretTapTimer = null;
+
+  function openSecret() {
+    if (!secretOverlay) return;
+    if (secretMessageEl) secretMessageEl.textContent = secretMessage;
+    secretOverlay.classList.add("open");
+  }
+
+  function closeSecret() {
+    if (secretOverlay) secretOverlay.classList.remove("open");
+  }
+
+  if (eyebrowTrigger) {
+    eyebrowTrigger.addEventListener("click", function () {
+      secretTapCount++;
+      clearTimeout(secretTapTimer);
+      secretTapTimer = setTimeout(function () {
+        secretTapCount = 0;
+      }, 2500);
+      if (secretTapCount >= 5) {
+        secretTapCount = 0;
+        openSecret();
+      }
+    });
+  }
+
+  if (secretClose) secretClose.addEventListener("click", closeSecret);
+  if (secretOverlay) {
+    secretOverlay.addEventListener("click", function (e) {
+      if (e.target === secretOverlay) closeSecret();
+    });
+  }
+
 
